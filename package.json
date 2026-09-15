@@ -6,7 +6,6 @@
   "scripts": {
     "compile": "node scripts/compile.mjs",
     "predev": "node scripts/compile.mjs",
-    "prebuild": "node scripts/compile.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
