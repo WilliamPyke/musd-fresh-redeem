@@ -7,8 +7,8 @@ export const mezo = {
   rpcUrls: {
     default: {
       http: [
-        "https://rpc.mezo.org",
         "https://api.explorer.mezo.org/api/eth-rpc",
+        "https://rpc.mezo.org",
       ],
     },
   },
@@ -73,7 +73,7 @@ export const priceFeedAbi = [
   {
     type: "function",
     name: "fetchPrice",
-    stateMutability: "nonpayable",
+    stateMutability: "view",
     inputs: [],
     outputs: [{ name: "", type: "uint256" }],
   },

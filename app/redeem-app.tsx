@@ -127,13 +127,13 @@ export function RedeemApp() {
   }, [address, onMezo, helper]);
 
   useEffect(() => {
-    if (!onMezo || parsedAmount === 0n) {
+    if (parsedAmount === 0n) {
       setQuote(null);
       return;
     }
     let cancelled = false;
     (async () => {
-      const sim = await publicClient.simulateContract({
+      const price = await publicClient.readContract({
         address: ADDRESSES.priceFeed,
         abi: priceFeedAbi,
         functionName: "fetchPrice",
@@ -142,7 +142,7 @@ export function RedeemApp() {
         address: ADDRESSES.hintHelpers,
         abi: hintHelpersAbi,
         functionName: "getRedemptionHints",
-        args: [parsedAmount, sim.result, DEFAULT_MAX_ITERATIONS],
+        args: [parsedAmount, price, DEFAULT_MAX_ITERATIONS],
       });
       if (!cancelled) setQuote({ first, nicr, truncated });
     })().catch(() => {
@@ -151,7 +151,7 @@ export function RedeemApp() {
     return () => {
       cancelled = true;
     };
-  }, [onMezo, parsedAmount]);
+  }, [parsedAmount]);
 
   async function run(label: string, fn: () => Promise<string>) {
     setError("");

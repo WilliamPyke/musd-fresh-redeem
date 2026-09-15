@@ -4,8 +4,8 @@ import { mezo } from "./mezo";
 export const publicClient = createPublicClient({
   chain: mezo,
   transport: fallback([
-    http("https://rpc.mezo.org"),
     http("https://api.explorer.mezo.org/api/eth-rpc"),
+    http("https://rpc.mezo.org"),
   ]),
 });
 

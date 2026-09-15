@@ -4,6 +4,11 @@ Unofficial same-transaction MUSD → BTC redemption helper for [Mezo](https://me
 
 **Not affiliated with Mezo.** No official support. Use at your own risk. Prefer an official redeem UI if Mezo ships one.
 
+- Repo: https://github.com/WilliamPyke/musd-fresh-redeem
+- App: https://musd-fresh-redeem-williampykes-projects.vercel.app
+
+If the Vercel URL asks you to log in, open the project in Vercel and turn **Deployment Protection** off so Discord users can load it without SSO.
+
 ## Why this exists
 
 `TroveManager.redeemCollateral` rejects a partial redemption unless `_partialRedemptionHintNICR` matches the post-redeem NICR in a tiny band (~0.00002%). Off-chain hints from the explorer, mezotools, or a script are computed in block N and almost always mined in block N+1. One BTC oracle tick and the transaction reverts.
