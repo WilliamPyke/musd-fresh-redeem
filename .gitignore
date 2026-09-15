@@ -1,0 +1,13 @@
+node_modules
+.next
+out
+cache
+broadcast
+lib/forge-std
+.env
+.env.local
+.vercel
+dist
+coverage
+*.log
+.DS_Store
