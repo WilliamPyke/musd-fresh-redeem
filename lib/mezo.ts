@@ -96,3 +96,31 @@ export const hintHelpersAbi = [
     ],
   },
 ] as const;
+
+export const redeemHelperAbi = [
+  {
+    type: "constructor",
+    stateMutability: "nonpayable",
+    inputs: [
+      { name: "_troveManager", type: "address" },
+      { name: "_hintHelpers", type: "address" },
+      { name: "_sortedTroves", type: "address" },
+      { name: "_priceFeed", type: "address" },
+      { name: "_musd", type: "address" },
+    ],
+  },
+  {
+    type: "function",
+    name: "redeem",
+    stateMutability: "nonpayable",
+    inputs: [
+      { name: "amount", type: "uint256" },
+      { name: "maxIterations", type: "uint256" },
+    ],
+    outputs: [],
+  },
+] as const;
+
+export const HELPER_ARTIFACT_URL =
+  "https://raw.githubusercontent.com/WilliamPyke/musd-fresh-redeem/main/lib/generated/RedeemHelper.json";
+

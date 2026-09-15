@@ -3,17 +3,15 @@
 import { type Hex, formatUnits, isAddress, parseUnits } from "viem";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
-  redeemHelperAbi,
-  redeemHelperBytecode,
-} from "@/lib/generated/RedeemHelper";
-import {
   ADDRESSES,
   DEFAULT_MAX_ITERATIONS,
+  HELPER_ARTIFACT_URL,
   MEZO_CHAIN_ID,
   STORAGE_KEY,
   erc20Abi,
   hintHelpersAbi,
   priceFeedAbi,
+  redeemHelperAbi,
 } from "@/lib/mezo";
 import {
   getInjectedProvider,
@@ -278,9 +276,16 @@ export function RedeemApp() {
               run("Deploying helper", async () => {
                 if (!address) throw new Error("Connect first");
                 const wallet = walletClientFrom(address);
+                const artifactRes = await fetch(HELPER_ARTIFACT_URL);
+                if (!artifactRes.ok) {
+                  throw new Error("Could not load helper bytecode from GitHub");
+                }
+                const artifact = (await artifactRes.json()) as {
+                  bytecode: `0x${string}`;
+                };
                 const hash = await wallet.deployContract({
                   abi: redeemHelperAbi,
-                  bytecode: redeemHelperBytecode,
+                  bytecode: artifact.bytecode,
                   args: [
                     ADDRESSES.troveManager,
                     ADDRESSES.hintHelpers,
